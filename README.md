@@ -1,228 +1,145 @@
+# 🏥 JeevanMed AI ERP
+
+## AI-Powered Medical Finance Management System
+
+An AI-powered healthcare finance management system built using FastAPI, Streamlit, and Groq LLM APIs.
 
 ---
 
-```md
-# 💰 Medical Finance Management System (FastAPI)
+# 🚀 Features
 
-## 📌 Overview
-This project is a Python-based finance tracking system built using FastAPI and Streamlit.  
-It manages patients, invoices, transactions, and financial analytics in a structured way.
-
-The system simulates a real-world hospital/finance backend with proper business logic, validation, and role-based access.
-
----
-
-## 🚀 Features
-
-### 1. Patient Management
-- Create, update, delete patients
-- Store medical and personal details
-- Linked with invoices
-
-### 2. Invoice Management
-- Generate invoices for patients
-- Track total, paid, and due amounts
-- Status: pending, partial, paid
-- Auto updates after payment
-
-### 3. Transaction System
-- Record payments  
-- ✅ Prevent overpayment  
-- ✅ Auto-update invoice status  
-- Maintains payment history  
-
-### 4. Analytics Dashboard
-- Total invoices  
-- Total revenue  
-- Pending amount  
-- Paid vs partial invoices  
-
-### 5. Authentication & Roles
-- JWT-based login system  
-- Roles:
-  - Admin → Full access  
-  - Analyst → View + insights  
-  - Viewer → Read-only  
-
-### 6. Streamlit Frontend
-- Interactive dashboard UI  
-- Login system  
-- KPI cards  
-- Data tables  
-- Payment interface  
+- Patient Management
+- Invoice Management
+- Transaction Tracking
+- Financial Analytics
+- AI-Powered Recommendations
+- JWT Authentication
+- Role-Based Access Control
+- Streamlit Dashboard
 
 ---
 
-## 🔄 System Flow
+# 🤖 AI Decision Engine
 
-**Patient → Invoice → Transaction → Analytics**
+The project integrates the **Llama-3.1-8B-Instant** model using the **Groq API** to generate intelligent financial recommendations.
 
-1. Patient is created  
-2. Invoice is generated  
-3. Payment is recorded (Transaction)  
-4. Invoice updates automatically  
-5. Analytics reflects real-time data  
-
----
-
-## 🧠 Mapping to Assignment
-
-| Assignment Requirement | Implementation |
-|----------------------|--------------|
-| Financial Records | Invoices & Transactions |
-| Income/Expense | Payments (income) & due (pending) |
-| Summary | Analytics API |
-| Roles | Admin, Analyst, Viewer |
-| CRUD | Patients, Invoices, Transactions |
-| Validation | Overpayment prevention, role checks |
+AI Features:
+- Financial risk analysis
+- Pending invoice detection
+- Smart payment recommendations
+- AI-generated financial summaries
 
 ---
 
-## 🛠 Tech Stack
+# 🧠 AI Workflow
 
-- FastAPI  
-- SQLAlchemy  
-- SQLite  
-- JWT Authentication (python-jose)  
-- Streamlit (Frontend)  
-- Requests  
+Patient Data → Invoice Data → Financial Metrics → Groq API → AI Recommendations
 
 ---
 
-## 📂 Project Structure
+# 📊 Example AI Output
 
+## Raw Financial Data
+
+```json
+{
+  "total_invoices": 5,
+  "total_revenue": 13513,
+  "total_pending_amount": 2399,
+  "paid_invoices": 1,
+  "partial_invoices": 2
+}
 ```
 
-medical_finance_api/
-│
-├── app/                # Backend
-├── frontend/           # Streamlit UI
-├── medical.db
-├── requirements.txt
-└── README.md
+## AI Metrics
 
-````
+```json
+{
+  "pending_ratio": 0.18,
+  "payment_completion_rate": 0.2,
+  "partial_ratio": 0.4
+}
+```
+
+## AI Recommendations
+
+- Send payment reminders for pending invoices
+- Call overdue patients directly
+- Offer payment plans to partial payers
 
 ---
 
-## ⚙️ Setup Instructions
+# 🛠 Tech Stack
 
-### 1. Install Dependencies
+- FastAPI
+- SQLAlchemy
+- SQLite
+- Streamlit
+- JWT Authentication
+- Groq API
+- Llama-3.1-8B-Instant
+
+---
+
+# ⚙️ Setup Instructions
+
+## Install Dependencies
+
 ```bash
 pip install -r requirements.txt
-````
+```
 
-### 2. Run Backend
+## Run Backend
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-Backend URL:
-[http://127.0.0.1:8000](http://127.0.0.1:8000)
-
-API Docs:
-[http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
-
----
-
-### 3. Run Frontend (Streamlit)
+## Run Frontend
 
 ```bash
 cd frontend
 streamlit run app.py
 ```
 
-Frontend URL:
-[http://localhost:8501](http://localhost:8501)
+---
+
+# 📡 API Endpoints
+
+## Authentication
+- POST /auth/signup
+- POST /auth/token
+
+## Patients
+- POST /patients/
+- GET /patients/
+
+## Invoices
+- POST /invoices/
+- GET /invoices/
+
+## Transactions
+- POST /transactions/
+- GET /transactions/
+
+## Analytics
+- GET /analytics/summary
+
+## AI APIs
+- GET /ai/financial-analysis
+- POST /ai/recommendations
 
 ---
 
-## 🔐 How to Use the System
+# 🔗 GitHub Repository
 
-1. Signup (first user becomes Admin)
-2. Login
-3. Create Patient
-4. Generate Invoice
-5. Make Payment
-6. View Analytics Dashboard
+Repository Link:
+
+https://github.com/Suryabarik/SAIntellectSolutions_assignment
 
 ---
 
-## 📡 API Endpoints & Working
+# 👨‍💻 Author
 
-### 🔐 Authentication
-
-* **POST /auth/signup** → Create new user (first user becomes admin)
-* **POST /auth/token** → Login & get access token
-* **POST /auth/refresh** → Refresh token
-* **GET /auth/me** → Get current user info
-
----
-
-### 👤 Patients
-
-* **POST /patients/** → Create patient
-* **GET /patients/** → Get all patients
-* **GET /patients/{id}** → Get single patient
-* **PUT /patients/{id}** → Update patient
-* **DELETE /patients/{id}** → Delete patient (Admin only)
-
----
-
-### 🧾 Invoices
-
-* **POST /invoices/** → Create invoice (default: pending)
-* **GET /invoices/** → Get all invoices
-* **GET /invoices/{id}** → Get invoice details
-* **DELETE /invoices/{id}** → Delete invoice (Admin only)
-
----
-
-### 💳 Transactions
-
-* **POST /transactions/** → Record payment
-
-  * ✅ Prevents overpayment
-  * ✅ Updates invoice (paid_amount, due_amount, status)
-* **GET /transactions/** → Get all transactions
-* **GET /transactions/{id}** → Get single transaction
-* **DELETE /transactions/{id}** → Delete transaction (Admin only)
-
----
-
-### 📊 Analytics
-
-* **GET /analytics/summary**
-
-Returns:
-
-* Total invoices
-* Total revenue
-* Pending amount
-* Paid invoices
-* Partial invoices
-
----
-
-## ⚠️ Important Business Logic
-
-### ✅ Overpayment Prevention
-
-Payment cannot exceed invoice due amount
-
-### ✅ Invoice Status Logic
-
-* **pending** → No payment
-* **partial** → Partial payment
-* **paid** → Fully paid
-
----
-
----
-
-## 🧑‍💻 Author
-
-**Suryakanta Barik**
-Python Developer | Backend | AI/ML
-
+Suryakanta Barik  
+Python Developer | Backend Developer | AI/ML Enthusiast
