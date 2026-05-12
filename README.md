@@ -1,4 +1,3 @@
-Here’s your **fully corrected and clean `README.md`** — just copy & paste directly 👇
 
 ---
 
